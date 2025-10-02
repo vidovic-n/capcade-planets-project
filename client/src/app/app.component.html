@@ -1,19 +1,29 @@
 <div class="header-wrapper">
     <div class="header-title">Planets</div>
-    <span class="example-spacer"></span>
+    <span class="header-spacer"></span>
     <div class="header-actions">
-        <button mat-button class="btn-add-planet"> New planet</button>
+            <div class="header-flex-container">
+                <div> <button matMiniFab (click)="view = 'grid'">
+                        <mat-icon>view_module</mat-icon>
+                    </button>
+                </div>
+                <div> <button matMiniFab (click)="view = 'table'">
+                        <mat-icon>view_list</mat-icon>
+                    </button>
+                </div>
+            </div>
+        <div><input matInput class="search-field" (keyup)="applyFilter($event)" placeholder="Search..."></div>
+        <div><button mat-button class="btn-add-planet"> New planet</button></div>
     </div>
 
 </div>
 <div class="main-wrapper">
-    <div class="table-wrapper">
+    <div *ngIf="view === 'table'" class="table-wrapper">
         <div class="table">
-            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
-                class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
                 <ng-container matColumnDef="planetName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by planetName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         <span class="table-column-name">Name</span>
                     </th>
                     <td mat-cell *matCellDef="let element">
@@ -35,21 +45,21 @@
                 </ng-container>
 
                 <ng-container matColumnDef="planetRadiusKM">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         <span class="table-column-name">Radius in km</span>
                     </th>
                     <td mat-cell *matCellDef="let element"> {{element.planetRadiusKM}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="distFromSun">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+                <ng-container matColumnDef="fromSun">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         <span class="table-column-name">Dist. from Sun</span>
                     </th>
                     <td mat-cell *matCellDef="let element"> {{element.distInMillionsKM.fromSun}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="distFromEarth">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+                <ng-container matColumnDef="fromEarth">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         <span class="table-column-name">Dist. from earth</span>
                     </th>
                     <td mat-cell *matCellDef="let element"> {{element.distInMillionsKM.fromEarth}} </td>
@@ -59,5 +69,27 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
         </div>
+    </div>
+
+    <div *ngIf="view === 'grid'" class="card-wrapper">
+        <mat-card *ngFor="let card of dataSource.data" class="card">
+            <div><img [src]="card.imageUrl" class="card-icon"></div>
+            <p class="card-title"> {{ card.planetName }}</p>
+            <p class="card-description"> {{ card.description }}</p>
+            <div class="card-details-wrapper">
+                <div>
+                    <div class="card-details-data">{{ card.planetColor }}</div>
+                    <div class="card-details-label"> Color </div>
+                    <div class="card-details-data">{{ card.planetRadiusKM }}</div>
+                    <div class="card-details-label"> Radius in km </div>
+                </div>
+                <div>
+                    <div class="card-details-data">{{ card.distInMillionsKM.fromEarth }}</div>
+                    <div class="card-details-label"> Dist. from Sun </div>
+                    <div class="card-details-data">{{ card.distInMillionsKM.fromEarth }}</div>
+                    <div class="card-details-label"> Dist. from Earth </div>
+                </div>
+            </div>
+        </mat-card>
     </div>
 </div>
