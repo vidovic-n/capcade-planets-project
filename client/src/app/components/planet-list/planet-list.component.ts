@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -8,6 +7,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule, Router } from '@angular/router';
 import { AddNewPlanetModalComponent } from '../add-new-planet-modal/add-new-planet-modal.component';
+import { PlanetService } from '../../services/planet.service';
 
 export interface PlanetElement {
   description: string;
@@ -23,7 +23,6 @@ export interface PlanetElement {
   planetRadiusKM: number
 }
 
-
 @Component({
   selector: 'app-planet-list',
   templateUrl: './planet-list.component.html',
@@ -38,36 +37,19 @@ export class PlanetListComponent {
   view: string = 'table';
   showModal = false;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private router: Router, private planetService: PlanetService) { }
 
    ngOnInit(): void {
-    this.http.get<PlanetElement[]>('http://localhost:3001/api/planets').subscribe(
-      (response) => {
-        this.dataSource.data = this.convertResponse(response);
-      },
-      (error) => {
-        console.error('API Error:', error);
-      }
-    );
+     this.planetService.getAllPlanets();
+
+     
+  this.planetService.planets$.subscribe((data) => {
+    this.dataSource.data = data;
+  });
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-  }
-
-
-  convertResponse(response: PlanetElement[]): PlanetElement[] {
-    return response.map((item) => {
-      if (typeof item.distInMillionsKM === 'string') {
-        const parsedDist = JSON.parse(item.distInMillionsKM);
-
-        return {
-          ...item,
-          distInMillionsKM: parsedDist,
-        };
-      }
-      return item;
-    });
   }
 
   applyFilter(event: Event) {

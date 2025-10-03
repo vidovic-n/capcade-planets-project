@@ -81,6 +81,7 @@ export class AddNewPlanetModalComponent {
     this.planetService.createPlanet(data).subscribe({
       next: (response) => {
         console.log('Planet created:', response);
+        this.planetService.getAllPlanets();
         this.close.emit(true);
       },
       error: (err) => {
