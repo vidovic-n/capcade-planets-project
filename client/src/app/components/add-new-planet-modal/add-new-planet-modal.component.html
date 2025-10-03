@@ -1,0 +1,48 @@
+
+<div class="modal-backdrop" *ngIf="show">
+  <div class="modal">
+    <h2>New planet</h2>
+
+    <div class="form-group">
+      <label for="photo">Photo</label>
+      <input type="file" id="imageUrl" (change)="onFileSelected($event)" />
+    </div>
+
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" [(ngModel)]="formData.planetName" />
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea [(ngModel)]="formData.description"></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group half">
+        <label>Radius in km</label>
+        <input type="number" [(ngModel)]="formData.planetRadiusKM" />
+      </div>
+      <div class="form-group half">
+        <label>Color</label>
+        <input type="text" [(ngModel)]="formData.planetColor" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group half">
+        <label>Dist. from Sun</label>
+        <input type="number" [(ngModel)]="formData.distInMillionsKM.fromSun" />
+      </div>
+      <div class="form-group half">
+        <label>Dist. from Earth</label>
+        <input type="number" [(ngModel)]="formData.distInMillionsKM.fromEarth" />
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="create-btn" (click)="create()">Create</button>
+      <button class="cancel-btn" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,244 @@
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    background-color: #ECEFF4;
+    height: -webkit-fill-available;
+}
+
+.header-wrapper {
+    display: flex;
+    padding: 40px;
+    flex-direction: row;
+    background-color: white;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-family: Inter;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 38px;
+    line-height: 40px;
+}
+
+.header-spacer {
+    flex: 1 1 auto;
+}
+
+.table {
+    display: flex;
+    width: 100%;
+}
+
+.table-wrapper {
+    display: flex;
+    width: 95vw;
+    background: #ECEFF4;
+}
+
+.table-column-name {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #7A7F80;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 38px;
+    column-gap: 20px;
+}
+
+.btn-add-planet {
+    width: 120px;
+    height: 40px;
+    border-radius: 4px;
+    gap: 10px;
+    padding-top: 10px;
+    padding-right: 12px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    background: #4C396F;
+}
+
+.search-field {
+    width: 240;
+    height: 20px;
+    border-width: 1px;
+    gap: 10px;
+    border-radius: 4px;
+    padding: 10px;
+    color: #BDBFBF;
+}
+
+.avatar {
+    display: inline;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.first-column {
+    display: flex;
+    max-width: 370px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    align-items: center;
+}
+
+.description {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 12px;
+    color: #595F60;
+}
+
+.header-flex-container {
+    display: flex;
+    column-gap: 20px;
+}
+
+// ***************** kartice *****************
+
+.card-wrapper {
+    display: grid;
+    width: 95vw;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 515px;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+}
+
+.card:hover {
+    border: 2px solid #8c3cbb;
+}
+
+.card-icon {
+    display: inline;
+    width: 80px;
+    height: 80px;
+}
+
+.card-title {
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.card-description {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    height:160px;
+    max-height: 220px;
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+mat-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+.card-details-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.card-details-data {
+    font-family: Inter;
+    font-weight: 600;
+    font-style: Semi Bold;
+    font-size: 16px;
+    line-height: 20px;
+    color: #242626;
+}
+
+.card-details-label {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #595F60;
+    padding-bottom: 10px;
+}
+
+.mat-mini-fab:active {
+  background-color: #ff4081; 
+  transform: scale(0.9); 
+}
+
+//  *********** Overriding angular material styles ************
+
+.mat-mdc-button:not(:disabled) {
+    color: white;
+}
+
+.mat-mdc-cell {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #242626;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.mat-mdc-table {
+    background-color: white;
+}
+
+.mat-mdc-header-row {
+    height: 40px;
+}
+
+.mat-mdc-header-cell{
+    border-bottom: 1px solid #DEDFDF;
+
+}
+
+.mat-mdc-row {
+    height: 76px;
+}
+
+.mat-mdc-cell {
+    border-bottom: 1px solid #DEDFDF;
+}
+
+.mdc-dialog--open .mat-mdc-dialog-surface {
+  width: max-content !important;
+}
+
+.mat-mdc-dialog-container {
+   width: max-content !important;
+}

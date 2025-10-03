@@ -1,0 +1,10 @@
+<div *ngIf="planetData">
+  <h2>{{ planetData.planetName }}</h2>
+  <img [src]="planetData.imageUrl" alt="{{ planetData.planetName }}" />
+  <p>{{ planetData.description }}</p>
+
+  <p>Color: {{ planetData.planetColor }}</p>
+  <p>Radius (km): {{ planetData.planetRadiusKM }}</p>
+  <p>Distance from Sun (millions km): {{ planetData.distInMillionsKM.fromSun }}</p>
+  <p>Distance from Earth (millions km): {{ planetData.distInMillionsKM.fromEarth }}</p>
+</div>
