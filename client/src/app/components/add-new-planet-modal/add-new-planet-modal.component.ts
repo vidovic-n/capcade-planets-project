@@ -78,10 +78,9 @@ export class AddNewPlanetModalComponent {
     data.append('planetColor', this.formData.planetColor);
     data.append('distInMillionsKM', JSON.stringify(this.formData.distInMillionsKM));
 
-    this.planetService.createPlanet(data).subscribe({
+    this.planetService.addPlanet(data).subscribe({
       next: (response) => {
         console.log('Planet created:', response);
-        this.planetService.getAllPlanets();
         this.close.emit(true);
       },
       error: (err) => {

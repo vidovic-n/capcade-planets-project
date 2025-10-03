@@ -1,0 +1,36 @@
+.header-wrapper {
+    display: flex;
+    padding: 40px;
+    flex-direction: row;
+    background-color: white;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-family: Inter;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 38px;
+    line-height: 40px;
+}
+
+.header-spacer {
+    flex: 1 1 auto;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 38px;
+    column-gap: 20px;
+}
+
+.header-flex-container {
+    display: flex;
+    column-gap: 20px;
+}

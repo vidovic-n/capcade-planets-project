@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { PlanetElement } from '../components/planet-list/planet-list.component';
 
 @Injectable({
@@ -13,9 +13,8 @@ export class PlanetService {
 
   constructor(private http: HttpClient) { }
 
-
   getAllPlanets() {
-    this.http.get<PlanetElement[]>('http://localhost:3001/api/planets').subscribe(
+    this.http.get<PlanetElement[]>(this.apiUrl).subscribe(
       (response) => {
         const converted = this.convertResponse(response);
         this.planetsSubject.next(converted);
@@ -26,26 +25,32 @@ export class PlanetService {
     );
   }
 
-  convertResponse(response: PlanetElement[]): PlanetElement[] {
-    return response.map((item) => {
-      if (typeof item.distInMillionsKM === 'string') {
-        const parsedDist = JSON.parse(item.distInMillionsKM);
-
+  convertSinglePlanet(planet: PlanetElement): PlanetElement {
+    if (typeof planet.distInMillionsKM === 'string') {
+        const parsedDist = JSON.parse(planet.distInMillionsKM);
         return {
-          ...item,
+          ...planet,
           distInMillionsKM: parsedDist,
         };
       }
-      return item;
-    });
+      return planet;
+  }
+
+  convertResponse(response: PlanetElement[]): PlanetElement[] {
+    return response.map((planet) => this.convertSinglePlanet(planet));
   }
 
   getPlanetById(id: number): Observable<PlanetElement> {
     return this.http.get<PlanetElement>(`${this.apiUrl}/${id}`);
   }
 
-    createPlanet(data: Object): Observable<any> {
-    return this.http.post(this.apiUrl, data);
-  }
+    addPlanet(newPlanet: FormData): Observable<PlanetElement> {
+      return this.http.post<PlanetElement>(this.apiUrl, newPlanet).pipe(
+        tap((createdPlanet) => {
+          const current = this.planetsSubject.value;
+          this.planetsSubject.next([...current, this.convertSinglePlanet(createdPlanet)]);
+        })
+      );
+    }
 
 }

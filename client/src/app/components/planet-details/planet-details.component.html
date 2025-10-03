@@ -1,3 +1,12 @@
+<div class="header-wrapper">
+    <div class="header-title">Planets</div>
+    <span class="header-spacer"></span>
+    <div class="header-actions">
+        <div><button mat-button class="btn-add-planet" > Edit</button></div>
+        <div><button mat-button class="btn-add-planet"> delete</button></div>
+    </div>
+    <!-- <app-add-new-planet-modal  [show]="showModal" (close)="closeModal()"></app-add-new-planet-modal> -->
+</div>
 <div *ngIf="planetData">
   <h2>{{ planetData.planetName }}</h2>
   <img [src]="planetData.imageUrl" alt="{{ planetData.planetName }}" />
