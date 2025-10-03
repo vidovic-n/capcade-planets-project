@@ -10,7 +10,7 @@ export interface Distances {
 
 export interface PlanetFormData {
   id: number;
-  imageFile: File | null;
+  file: File | null;
   imageName: string;
   planetName: string;
   description: string;
@@ -33,10 +33,11 @@ export class AddNewPlanetModalComponent {
   @Input() show: boolean = false;
   @Output() close = new EventEmitter<boolean>();
 
+  constructor(private planetService: PlanetService) { }
 
   formData: PlanetFormData = {
     id: 0,
-    imageFile: null,
+    file: null,
     imageName: '',
     planetName: '',
     description: '',
@@ -44,7 +45,6 @@ export class AddNewPlanetModalComponent {
     planetColor: '',
     distInMillionsKM: {} as Distances,
   };
-  constructor(private planetService: PlanetService) { }
 
   openModal() {
     this.show = true;
@@ -55,24 +55,30 @@ export class AddNewPlanetModalComponent {
   }
 
   onFileSelected(event: any) {
-    this.formData.imageFile = event.target.files[0];
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files.length > 0) {
+      this.formData.file = input.files[0];
+    } else {
+      this.formData.file = null;
+    }
   }
 
   create() {
-    const planetObject = {
-        imageFile: this.formData.imageFile,
-        imageName: this.formData.imageFile != null ? this.formData.imageFile.name : '',
-        planetName: this.formData.planetName,
-        description: this.formData.description,
-        planetRadiusKM: this.formData.planetRadiusKM,
-        planetColor: this.formData.planetColor,
-        distInMillionsKM: {
-          fromSun: this.formData.distInMillionsKM.fromSun,
-          fromEarth: this.formData.distInMillionsKM.fromEarth
-        }
+    const data = new FormData()
+
+    if (this.formData.file) {
+      data.append('file', this.formData.file);
     }
 
-    this.planetService.createPlanet(planetObject).subscribe({
+    data.append('imageName', this.formData.file ? this.formData.file.name : '');
+    data.append('planetName', this.formData.planetName);
+    data.append('description', this.formData.description);
+    data.append('planetRadiusKM', this.formData.planetRadiusKM.toString());
+    data.append('planetColor', this.formData.planetColor);
+    data.append('distInMillionsKM', JSON.stringify(this.formData.distInMillionsKM));
+
+    this.planetService.createPlanet(data).subscribe({
       next: (response) => {
         console.log('Planet created:', response);
         this.close.emit(true);
@@ -83,5 +89,4 @@ export class AddNewPlanetModalComponent {
       }
     });
   }
-
 }
