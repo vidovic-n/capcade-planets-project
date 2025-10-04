@@ -1,36 +1,110 @@
-.header-wrapper {
+.btn-delete {
+    width: 120px;
+    height: 40px;
+    border-radius: 4px;
+    gap: 10px;
+    padding-top: 8px;
+    padding-right: 12px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    background: #4C396F;
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+    border-style: none;
+}
+
+.btn-edit {
+    @extend .btn-delete;
+    background-color: #D0DCE1;
+    color: #125169;
+}
+
+.card-wrapper {
+    display: grid;
+    width: 95vw;
+    grid-template-columns: 4fr 2fr 1fr;
+    gap: 30px;
+}
+
+.card-icon {
+    width: 180px;
+    height: 180px;
+    padding-right: 30px;
+}
+
+.main-card {
     display: flex;
-    padding: 40px;
     flex-direction: row;
-    background-color: white;
+    height: 272px;
+    border-radius: 8px;
+    border: 1px solid #DEDFDF;
+    background-color: #FFFFFF;
+    align-items: center;
+    padding: 20px;
 }
 
-.header-title {
-    display: flex;
-    align-items: center;
-    justify-content: left;
+.small-card {
+    @extend .main-card;
+    height: 126px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.small-card-wrapper {
+    display: grid;
+    gap: 20px;
+}
+
+.card-title {
     font-family: Inter;
-    font-weight: 700;
-    font-style: Bold;
-    font-size: 38px;
+    font-weight: 600;
+    font-size: 36px;
     line-height: 40px;
+    letter-spacing: 0%;
+    color: #242626;
+    padding-bottom: 30px;
 }
 
-.header-spacer {
-    flex: 1 1 auto;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    justify-content: right;
+.card-description {
     font-family: Inter;
-    font-weight: 700;
-    font-size: 38px;
-    column-gap: 20px;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    line-height: 20px;
+    color: #595F60;
+    max-width: 325px;
 }
 
-.header-flex-container {
-    display: flex;
-    column-gap: 20px;
+.card-data {
+    font-family: Inter;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    color: #242626;
+}
+
+.card-label {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #595F60;
+}
+
+.light {
+    @extend .card-label;
+    color: #DEDFDF;
+}
+
+.mat-mdc-button:not(:disabled) {
+    color: white;
+}
+
+.mat-mdc-card {
+    box-shadow: none;
 }

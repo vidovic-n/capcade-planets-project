@@ -1,19 +1,59 @@
 <div class="header-wrapper">
-    <div class="header-title">Planets</div>
-    <span class="header-spacer"></span>
-    <div class="header-actions">
-        <div><button mat-button class="btn-add-planet" > Edit</button></div>
-        <div><button mat-button class="btn-add-planet"> delete</button></div>
-    </div>
-    <!-- <app-add-new-planet-modal  [show]="showModal" (close)="closeModal()"></app-add-new-planet-modal> -->
+  <div class="header-title">Planets</div>
+  <span class="header-spacer"></span>
+  <div class="header-actions">
+    <div><button mat-button class="btn-delete btn-edit"> Edit</button></div>
+    <div><button mat-button class="btn-delete"> Delete</button></div>
+  </div>
+  <!-- <app-add-new-planet-modal  [show]="showModal" (close)="closeModal()"></app-add-new-planet-modal> -->
 </div>
-<div *ngIf="planetData">
-  <h2>{{ planetData.planetName }}</h2>
-  <img [src]="planetData.imageUrl" alt="{{ planetData.planetName }}" />
-  <p>{{ planetData.description }}</p>
 
-  <p>Color: {{ planetData.planetColor }}</p>
-  <p>Radius (km): {{ planetData.planetRadiusKM }}</p>
-  <p>Distance from Sun (millions km): {{ planetData.distInMillionsKM.fromSun }}</p>
-  <p>Distance from Earth (millions km): {{ planetData.distInMillionsKM.fromEarth }}</p>
+<div class="main-wrapper">
+  <div class="card-wrapper">
+
+     <div>
+      <mat-card class="main-card">
+        <div>
+          <img [src]="planetData.imageUrl" class="card-icon">
+        </div>
+        <div>
+          <div class="card-title"> {{ planetData.planetName }}</div>
+          <div class="card-description"> {{ planetData.description }}</div>
+        </div>
+      </mat-card>
+      </div>
+
+      <div class="small-card-wrapper">
+      <mat-card class="main-card small-card">
+       
+          <div class="card-data"> {{ planetData.planetRadiusKM }}</div>
+          <div class="card-label light"> Radius in km</div>
+     
+      </mat-card>
+      
+      <mat-card class="main-card small-card">
+       
+          <div class="card-data"> {{ planetData.planetColor }}</div>
+          <div class="card-label light"> Color</div>
+     
+      </mat-card>
+      </div>
+
+         <div class="small-card-wrapper">
+      <mat-card class="main-card small-card">
+       
+          <div class="card-data"> {{ planetData.distInMillionsKM.fromSun }}</div>
+          <div class="card-label"> Dist. from Sun</div>
+     
+      </mat-card>
+      
+      <mat-card class="main-card small-card">
+       
+          <div class="card-data"> {{ planetData.distInMillionsKM.fromEarth}}</div>
+          <div class="card-label"> Dist. from Earth</div>
+     
+      </mat-card>
+      </div>
+
+  </div>
 </div>

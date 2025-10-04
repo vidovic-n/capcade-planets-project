@@ -35,7 +35,7 @@ export class AddNewPlanetModalComponent {
 
   constructor(private planetService: PlanetService) { }
 
-  formData: PlanetFormData = {
+  initialFormData: PlanetFormData = {
     id: 0,
     file: null,
     imageName: '',
@@ -43,14 +43,20 @@ export class AddNewPlanetModalComponent {
     description: '',
     planetRadiusKM: 0,
     planetColor: '',
-    distInMillionsKM: {} as Distances,
+    distInMillionsKM: {
+      fromSun: 0,
+      fromEarth: 0
+    },
   };
+
+  formData = { ...this.initialFormData };
 
   openModal() {
     this.show = true;
   }
 
   cancel() {
+    this.formData = { ...this.initialFormData };
     this.close.emit();
   }
 
@@ -81,6 +87,7 @@ export class AddNewPlanetModalComponent {
     this.planetService.addPlanet(data).subscribe({
       next: (response) => {
         console.log('Planet created:', response);
+        this.formData = { ...this.initialFormData };
         this.close.emit(true);
       },
       error: (err) => {
