@@ -150,12 +150,16 @@ mat-card {
     padding-bottom: 10px;
 }
 
+.selected-row{
+    cursor:pointer;
+}
+
+//  *********** Overriding angular material styles ************
+
 .mat-mini-fab:active {
     background-color: #ff4081;
     transform: scale(0.9);
 }
-
-//  *********** Overriding angular material styles ************
 
 .mat-mdc-button:not(:disabled) {
     color: white;

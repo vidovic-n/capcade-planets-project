@@ -28,7 +28,7 @@ export interface PlanetElement {
   templateUrl: './planet-list.component.html',
   styleUrls: ['./planet-list.component.scss'],
   standalone: true,
-  imports: [AddNewPlanetModalComponent, CommonModule, MatTableModule, MatCardModule, RouterModule, MatButtonModule, MatTableModule, MatSortModule, CommonModule, MatIconModule, MatCardModule, RouterModule]
+  imports: [AddNewPlanetModalComponent, CommonModule, MatTableModule, RouterModule, MatButtonModule, MatSortModule, MatIconModule, MatCardModule]
 })
 export class PlanetListComponent {
   @ViewChild(MatSort) sort: MatSort = new MatSort;
@@ -39,13 +39,13 @@ export class PlanetListComponent {
 
   constructor(private router: Router, private planetService: PlanetService) { }
 
-   ngOnInit(): void {
-     this.planetService.getAllPlanets();
+  ngOnInit(): void {
+    this.planetService.getAllPlanets();
 
-     
-  this.planetService.planets$.subscribe((data) => {
-    this.dataSource.data = data;
-  });
+
+    this.planetService.planets$.subscribe((data) => {
+      this.dataSource.data = data;
+    });
   }
 
   ngAfterViewInit() {
@@ -67,6 +67,10 @@ export class PlanetListComponent {
 
   openPlanetDetails(id: number) {
     this.router.navigate(['/planet', id]);
+  }
+
+  onRowClicked(row: PlanetElement) {
+    this.router.navigate(['/planet', row.id]);
   }
 
 }
