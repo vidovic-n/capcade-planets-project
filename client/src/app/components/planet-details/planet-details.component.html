@@ -2,10 +2,11 @@
   <div class="header-title">Planets</div>
   <span class="header-spacer"></span>
   <div class="header-actions">
-    <div><button mat-button class="btn-delete btn-edit"> Edit</button></div>
-    <div><button mat-button class="btn-delete"> Delete</button></div>
+    <div><button mat-button class="btn-delete btn-edit" (click)="openEditModal()"> Edit</button></div>
+    <div><button mat-button class="btn-delete" (click)="openDeleteModal()"> Delete</button></div>
   </div>
-  <!-- <app-add-new-planet-modal  [show]="showModal" (close)="closeModal()"></app-add-new-planet-modal> -->
+  <app-delete-planet-modal  [show]="showModal" (close)="closeModal()"></app-delete-planet-modal>
+  <app-edit-planet-modal  [show]="showEditModal" (close)="closeModal()"></app-edit-planet-modal>
 </div>
 
 <div class="main-wrapper">

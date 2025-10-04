@@ -5,17 +5,21 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { PlanetElement } from '../planet-list/planet-list.component';
+import { DeletePlanetModalComponent } from '../delete-planet-modal/delete-planet-modal.component';
+import { EditPlanetModalComponent } from '../edit-planet-modal/edit-planet-modal.component';
 
 @Component({
   selector: 'app-planet-details',
   standalone: true,
   templateUrl: './planet-details.component.html',
   styleUrl: './planet-details.component.scss',
-  imports: [CommonModule, RouterModule, MatCardModule],
+  imports: [DeletePlanetModalComponent, EditPlanetModalComponent, CommonModule, RouterModule, MatCardModule],
 })
 export class PlanetDetailsComponent implements OnInit {
 
   planetId!: number;
+  showModal = false;
+  showEditModal = false;
   planetData: PlanetElement = {
     id: 0,
     imageUrl: '',
@@ -40,6 +44,18 @@ export class PlanetDetailsComponent implements OnInit {
     this.planetService.getPlanetById(this.planetId).subscribe(data => {
       this.planetData = data;
     });
+  }
+
+    openDeleteModal() {
+    this.showModal = true;
+  }
+
+  openEditModal() {
+      this.showEditModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
   }
 
 }

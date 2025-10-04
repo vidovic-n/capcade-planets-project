@@ -51,9 +51,9 @@ export class AddNewPlanetModalComponent {
 
   formData = { ...this.initialFormData };
 
-  openModal() {
-    this.show = true;
-  }
+  // openModal() {
+  //   this.show = true;
+  // }
 
   cancel() {
     this.formData = { ...this.initialFormData };
