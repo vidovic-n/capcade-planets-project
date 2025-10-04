@@ -10,7 +10,7 @@ export interface Distances {
 
 export interface PlanetFormData {
   id: number;
-  file: File | null;
+  file?: File | null;
   imageName: string;
   planetName: string;
   description: string;
@@ -50,10 +50,6 @@ export class AddNewPlanetModalComponent {
   };
 
   formData = { ...this.initialFormData };
-
-  // openModal() {
-  //   this.show = true;
-  // }
 
   cancel() {
     this.formData = { ...this.initialFormData };

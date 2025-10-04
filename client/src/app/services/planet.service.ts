@@ -53,4 +53,8 @@ export class PlanetService {
       );
     }
 
+    deletePlanet(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
 }

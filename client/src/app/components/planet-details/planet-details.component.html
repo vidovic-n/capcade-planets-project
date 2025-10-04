@@ -5,14 +5,15 @@
     <div><button mat-button class="btn-delete btn-edit" (click)="openEditModal()"> Edit</button></div>
     <div><button mat-button class="btn-delete" (click)="openDeleteModal()"> Delete</button></div>
   </div>
-  <app-delete-planet-modal  [show]="showModal" (close)="closeModal()"></app-delete-planet-modal>
-  <app-edit-planet-modal  [show]="showEditModal" (close)="closeModal()"></app-edit-planet-modal>
+  <app-delete-planet-modal [show]="showModal" [planetToDelete]="planetData" (close)="closeModal()"
+    (onConfirmDelete)="onDeleteConfirmed($event)" (onCancel)="onDeleteCancelled()"></app-delete-planet-modal>
+  <app-edit-planet-modal [show]="showEditModal" (close)="closeModal()"></app-edit-planet-modal>
 </div>
 
 <div class="main-wrapper">
   <div class="card-wrapper">
 
-     <div>
+    <div>
       <mat-card class="main-card">
         <div>
           <img [src]="planetData.imageUrl" class="card-icon">
@@ -22,39 +23,30 @@
           <div class="card-description"> {{ planetData.description }}</div>
         </div>
       </mat-card>
-      </div>
+    </div>
 
-      <div class="small-card-wrapper">
+    <div class="small-card-wrapper">
       <mat-card class="main-card small-card">
-       
-          <div class="card-data"> {{ planetData.planetRadiusKM }}</div>
-          <div class="card-label light"> Radius in km</div>
-     
+        <div class="card-data"> {{ planetData.planetRadiusKM }}</div>
+        <div class="card-label light"> Radius in km</div>
       </mat-card>
-      
-      <mat-card class="main-card small-card">
-       
-          <div class="card-data"> {{ planetData.planetColor }}</div>
-          <div class="card-label light"> Color</div>
-     
-      </mat-card>
-      </div>
 
-         <div class="small-card-wrapper">
       <mat-card class="main-card small-card">
-       
-          <div class="card-data"> {{ planetData.distInMillionsKM.fromSun }}</div>
-          <div class="card-label"> Dist. from Sun</div>
-     
+        <div class="card-data"> {{ planetData.planetColor }}</div>
+        <div class="card-label light"> Color</div>
       </mat-card>
-      
-      <mat-card class="main-card small-card">
-       
-          <div class="card-data"> {{ planetData.distInMillionsKM.fromEarth}}</div>
-          <div class="card-label"> Dist. from Earth</div>
-     
-      </mat-card>
-      </div>
+    </div>
 
+    <div class="small-card-wrapper">
+      <mat-card class="main-card small-card">
+        <div class="card-data"> {{ planetData.distInMillionsKM.fromSun }}</div>
+        <div class="card-label"> Dist. from Sun</div>
+      </mat-card>
+
+      <mat-card class="main-card small-card">
+        <div class="card-data"> {{ planetData.distInMillionsKM.fromEarth}}</div>
+        <div class="card-label"> Dist. from Earth</div>
+      </mat-card>
+    </div>
   </div>
 </div>
