@@ -11,6 +11,7 @@ export interface Distances {
 export interface PlanetFormData {
   id: number;
   file?: File | null;
+  imageUrl: string;
   imageName: string;
   planetName: string;
   description: string;
@@ -38,6 +39,7 @@ export class AddNewPlanetModalComponent {
   initialFormData: PlanetFormData = {
     id: 0,
     file: null,
+    imageUrl: '',
     imageName: '',
     planetName: '',
     description: '',

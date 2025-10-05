@@ -5,9 +5,13 @@
     <div><button mat-button class="btn-delete btn-edit" (click)="openEditModal()"> Edit</button></div>
     <div><button mat-button class="btn-delete" (click)="openDeleteModal()"> Delete</button></div>
   </div>
+
   <app-delete-planet-modal [show]="showModal" [planetToDelete]="planetData" (close)="closeModal()"
-    (onConfirmDelete)="onDeleteConfirmed($event)" (onCancel)="onDeleteCancelled()"></app-delete-planet-modal>
-  <app-edit-planet-modal [show]="showEditModal" (close)="closeModal()"></app-edit-planet-modal>
+    (onConfirmDelete)="onDeleteConfirmed($event)" (onCancel)="onDeleteCancelled()">
+  </app-delete-planet-modal>
+
+  <app-edit-planet-modal [show]="showEditModal" [planetToDelete]="planetData" (close)="closeEditModal()"
+    (onConfirmEdit)="onEditConfirmed($event)" (onCancelEdit)="onEditCancelled()"></app-edit-planet-modal>
 </div>
 
 <div class="main-wrapper">

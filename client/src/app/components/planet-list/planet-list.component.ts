@@ -11,6 +11,7 @@ import { PlanetService } from '../../services/planet.service';
 
 export interface PlanetElement {
   description: string;
+    file?: File | null;
   distInMillionsKM: {
     fromSun: number,
     fromEarth: number

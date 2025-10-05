@@ -1,15 +1,47 @@
-
-
 <div class="modal-backdrop" *ngIf="show">
   <div class="modal">
-    <div> Confirm editing </div>
+    <div class="modal-title">Edit planet</div>
 
-    
+    <div class="form-group">
+      <label for="photo">Photo</label>
+      <input type="file" id="imageFile" (change)="onFileSelected($event)" />
+    </div>
 
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" [(ngModel)]="data.planetName" />
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea [(ngModel)]="data.description"></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group half">
+        <label>Radius in km</label>
+        <input type="number" [(ngModel)]="data.planetRadiusKM" />
+      </div>
+      <div class="form-group half">
+        <label>Color</label>
+        <input type="text" [(ngModel)]="data.planetColor" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group half">
+        <label>Dist. from Sun</label>
+        <input type="number" [(ngModel)]="data.distInMillionsKM.fromSun" />
+      </div>
+      <div class="form-group half">
+        <label>Dist. from Earth</label>
+        <input type="number" [(ngModel)]="data.distInMillionsKM.fromEarth" />
+      </div>
+    </div>
 
     <div class="modal-actions">
-      <button class="dark-btn" (click)="deletePlanet()">Confirm</button>
-      <button class="light-btn" (click)="cancel()">Cancel</button>
+      <button class="dark-btn" (click)="editPlanet()">Confirm</button>
+      <button class="light-btn" (click)="cancelEdit()">Cancel</button>
     </div>
   </div>
 </div>

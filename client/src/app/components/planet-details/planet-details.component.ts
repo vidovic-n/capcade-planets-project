@@ -52,11 +52,12 @@ export class PlanetDetailsComponent implements OnInit {
 
   openDeleteModal() {
     this.planetToDelete = this.planetService.convertSinglePlanet(this.planetData);
-    console.log("planetTodelete", this.planetToDelete)
     this.showModal = true;
   }
 
   openEditModal() {
+    this.planetToDelete = this.planetService.convertSinglePlanet(this.planetData);
+    console.log("iz roditelja", this.planetToDelete)
     this.showEditModal = true;
   }
 
@@ -72,12 +73,44 @@ export class PlanetDetailsComponent implements OnInit {
     });
   }
 
+  onEditConfirmed(editedData: PlanetFormData) {
+    const formData = new FormData();
+    formData.append('planetName', editedData.planetName);
+    formData.append('description', editedData.description);
+    formData.append('planetRadiusKM', editedData.planetRadiusKM.toString());
+    formData.append('planetColor', editedData.planetColor);
+    formData.append('imageName', editedData.imageName);
+    formData.append('distInMillionsKM', JSON.stringify(editedData.distInMillionsKM));
+
+    if (editedData.file) {
+      formData.append('file', editedData.file)
+    } else {
+      formData.append('imageUrl', editedData.imageUrl)
+    }
+
+    this.planetService.updatePlanet(editedData.id, formData).subscribe(() => {
+      this.showEditModal = false;
+      this.router.navigate(['']);
+      console.log("edited planet", editedData)
+    });
+  }
+
+  
+  onEditCancelled() {
+    this.showEditModal = false;
+  }
+
+
   onDeleteCancelled() {
     this.showModal = false;
   }
 
   closeModal() {
     this.showModal = false;
+  }
+
+  closeEditModal() {
+    this.showEditModal = false;
   }
 
 }

@@ -14,7 +14,7 @@ import { PlanetFormData } from '../add-new-planet-modal/add-new-planet-modal.com
   ]
 })
 export class DeletePlanetModalComponent {
-  
+
   @Input() show: boolean = false;
   @Input() planetToDelete: PlanetFormData | null = null;
   @Output() onConfirmDelete = new EventEmitter<number>();

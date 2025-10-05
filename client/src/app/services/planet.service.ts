@@ -57,4 +57,17 @@ export class PlanetService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+updatePlanet(id: number, updatedPlanet: FormData): Observable<PlanetElement> {
+  return this.http.put<PlanetElement>(`${this.apiUrl}/${id}`, updatedPlanet).pipe(
+    tap((updated) => {
+      console.log("Updated: " + JSON.stringify(updated))
+      const current = this.planetsSubject.value;
+      const updatedList = current.map((planet) =>
+        planet.id === updated.id ? updated : planet 
+      );
+      this.planetsSubject.next(updatedList);
+    })
+  );
+}
+
 }
