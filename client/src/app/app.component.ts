@@ -18,8 +18,6 @@ import { RouterModule } from '@angular/router';
         MatButtonModule, MatTableModule, MatSortModule, CommonModule, MatIconModule, MatCardModule, MatDialogModule,  RouterModule
     ],
 })
-export class AppComponent {
+export class AppComponent {}
 
-
-    }
 

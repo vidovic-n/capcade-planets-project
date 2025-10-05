@@ -1,7 +1,8 @@
 <div class="modal-backdrop" *ngIf="show">
-  <div class="modal">
-    <div> Confirm deleting </div>
-     <div> Are you sure you want to delete <strong>{{ planetToDelete?.planetName }}</strong> ?  </div>
+  <div class="modal-delete">
+    <div ><mat-icon class="big-icon">announcement</mat-icon></div>
+    <div class="modal-title"> Confirm deleting </div>
+     <div class="modal-question"> Are you sure you want to delete <strong>{{ planetToDelete?.planetName }}</strong> ?  </div>
     <div class="modal-actions">
       <button class="dark-btn" (click)="confirm()">Confirm</button>
       <button class="light-btn" (click)="cancel()">Cancel</button>

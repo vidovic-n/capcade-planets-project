@@ -27,13 +27,13 @@ export class PlanetService {
 
   convertSinglePlanet(planet: PlanetModel): PlanetModel {
     if (typeof planet.distInMillionsKM === 'string') {
-        const parsedDist = JSON.parse(planet.distInMillionsKM);
-        return {
-          ...planet,
-          distInMillionsKM: parsedDist,
-        };
-      }
-      return planet;
+      const parsedDist = JSON.parse(planet.distInMillionsKM);
+      return {
+        ...planet,
+        distInMillionsKM: parsedDist,
+      };
+    }
+    return planet;
   }
 
   convertResponse(response: PlanetModel[]): PlanetModel[] {
@@ -44,30 +44,30 @@ export class PlanetService {
     return this.http.get<PlanetModel>(`${this.apiUrl}/${id}`);
   }
 
-    addPlanet(newPlanet: FormData): Observable<PlanetModel> {
-      return this.http.post<PlanetModel>(this.apiUrl, newPlanet).pipe(
-        tap((createdPlanet) => {
-          const current = this.planetsSubject.value;
-          this.planetsSubject.next([...current, this.convertSinglePlanet(createdPlanet)]);
-        })
-      );
-    }
+  addPlanet(newPlanet: FormData): Observable<PlanetModel> {
+    return this.http.post<PlanetModel>(this.apiUrl, newPlanet).pipe(
+      tap((createdPlanet) => {
+        const current = this.planetsSubject.value;
+        this.planetsSubject.next([...current, this.convertSinglePlanet(createdPlanet)]);
+      })
+    );
+  }
 
-    deletePlanet(id: number): Observable<void> {
+  deletePlanet(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-updatePlanet(id: number, updatedPlanet: FormData): Observable<PlanetModel> {
-  return this.http.put<PlanetModel>(`${this.apiUrl}/${id}`, updatedPlanet).pipe(
-    tap((updated) => {
-      console.log("Updated: " + JSON.stringify(updated))
-      const current = this.planetsSubject.value;
-      const updatedList = current.map((planet) =>
-        planet.id === updated.id ? updated : planet 
-      );
-      this.planetsSubject.next(updatedList);
-    })
-  );
-}
+  updatePlanet(id: number, updatedPlanet: FormData): Observable<PlanetModel> {
+    return this.http.put<PlanetModel>(`${this.apiUrl}/${id}`, updatedPlanet).pipe(
+      tap((updated) => {
+        console.log("Updated: " + JSON.stringify(updated))
+        const current = this.planetsSubject.value;
+        const updatedList = current.map((planet) =>
+          planet.id === updated.id ? updated : planet
+        );
+        this.planetsSubject.next(updatedList);
+      })
+    );
+  }
 
 }

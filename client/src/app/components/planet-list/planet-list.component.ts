@@ -30,7 +30,6 @@ export class PlanetListComponent {
   ngOnInit(): void {
     this.planetService.getAllPlanets();
 
-
     this.planetService.planets$.subscribe((data) => {
       this.dataSource.data = data;
     });

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PlanetModel } from '../../planetModel';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-delete-planet-modal',
@@ -10,7 +11,8 @@ import { PlanetModel } from '../../planetModel';
   styleUrl: './delete-planet-modal.component.scss',
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ]
 })
 export class DeletePlanetModalComponent {
