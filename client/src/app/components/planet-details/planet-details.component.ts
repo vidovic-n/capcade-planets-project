@@ -4,10 +4,9 @@ import { PlanetService } from '../../services/planet.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { PlanetElement } from '../planet-list/planet-list.component';
 import { DeletePlanetModalComponent } from '../delete-planet-modal/delete-planet-modal.component';
 import { EditPlanetModalComponent } from '../edit-planet-modal/edit-planet-modal.component';
-import { PlanetFormData } from '../add-new-planet-modal/add-new-planet-modal.component';
+import { PlanetModel } from '../../planetModel';
 
 @Component({
   selector: 'app-planet-details',
@@ -21,9 +20,9 @@ export class PlanetDetailsComponent implements OnInit {
   planetId!: number;
   showModal = false;
   showEditModal = false;
-  planet: PlanetFormData | null = null;
-  planetToDelete: PlanetElement | null = null;
-  planetData: PlanetElement = {
+  planet: PlanetModel | null = null;
+  planetToDelete: PlanetModel | null = null;
+  planetData: PlanetModel = {
     id: 0,
     imageUrl: '',
     imageName: '',
@@ -57,7 +56,6 @@ export class PlanetDetailsComponent implements OnInit {
 
   openEditModal() {
     this.planetToDelete = this.planetService.convertSinglePlanet(this.planetData);
-    console.log("iz roditelja", this.planetToDelete)
     this.showEditModal = true;
   }
 
@@ -73,7 +71,7 @@ export class PlanetDetailsComponent implements OnInit {
     });
   }
 
-  onEditConfirmed(editedData: PlanetFormData) {
+  onEditConfirmed(editedData: PlanetModel) {
     const formData = new FormData();
     formData.append('planetName', editedData.planetName);
     formData.append('description', editedData.description);
@@ -91,7 +89,6 @@ export class PlanetDetailsComponent implements OnInit {
     this.planetService.updatePlanet(editedData.id, formData).subscribe(() => {
       this.showEditModal = false;
       this.router.navigate(['']);
-      console.log("edited planet", editedData)
     });
   }
 

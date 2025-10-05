@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PlanetFormData } from '../add-new-planet-modal/add-new-planet-modal.component';
 import { PlanetService } from '../../services/planet.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { PlanetElement } from '../planet-list/planet-list.component';
+import { PlanetModel } from '../../planetModel';
 
 @Component({
   selector: 'app-edit-planet-modal',
@@ -20,27 +19,11 @@ import { PlanetElement } from '../planet-list/planet-list.component';
 })
 export class EditPlanetModalComponent {
   @Input() show: boolean = false;
-  // @Output() close = new EventEmitter<boolean>();
-  @Input() planetToDelete: PlanetElement | null = null;
-  @Output() onConfirmEdit = new EventEmitter<PlanetFormData>();
+  @Input() planetToDelete: PlanetModel | null = null;
+  @Output() onConfirmEdit = new EventEmitter<PlanetModel>();
   @Output() onCancelEdit = new EventEmitter<void>();
 
   constructor(private planetService: PlanetService, private route: ActivatedRoute,  private fb: FormBuilder) { }
-
-  formData: PlanetFormData = {
-    id: 0,
-    file: null,
-    imageName: '',
-    imageUrl: '',
-    planetName: '',
-    description: '',
-    planetRadiusKM: 0,
-    planetColor: '',
-    distInMillionsKM: {
-      fromSun: 0,
-      fromEarth: 0
-    },
-  };
 
   data = this.planetToDelete ?? {
    id: 0,
@@ -60,11 +43,9 @@ export class EditPlanetModalComponent {
   formGroup!: FormGroup;
     ngOnChanges(): void {
     if (this.planetToDelete) {
-      console.log("Creating data for update: " + JSON.stringify(this.planetToDelete))
       this.data = {
         id: this.planetToDelete.id,
-        file: this.planetToDelete.file ? this.planetToDelete.file : null,
-        imageUrl: this.planetToDelete.file ? '' : this.planetToDelete.imageUrl,
+        imageUrl: this.data.file ? '' : this.planetToDelete.imageUrl,
         imageName: this.planetToDelete.imageName,
         planetName: this.planetToDelete.planetName,
         description: this.planetToDelete.description,
@@ -75,7 +56,6 @@ export class EditPlanetModalComponent {
           fromEarth: this.planetToDelete.distInMillionsKM.fromEarth
         }
       };
-      // this.data = JSON.parse(JSON.stringify(this.planetToDelete));
     }
   }
 
@@ -83,15 +63,14 @@ export class EditPlanetModalComponent {
     const input = event.target as HTMLInputElement;
 
     if (input.files && input.files.length > 0) {
-      this.formData.file = input.files[0];
+      this.data.file = input.files[0];
     } else {
-      this.formData.file = null;
+      console.log("File not selected")
     }
   }
 
  editPlanet() {
     if (this.planetToDelete) {
-      console.log("Updating record with: " + JSON.stringify(this.data))
       this.onConfirmEdit.emit(this.data);
     }
   }

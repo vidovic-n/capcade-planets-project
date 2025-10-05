@@ -2,23 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PlanetService } from '../../services/planet.service';
+import { PlanetModel } from '../../planetModel';
 
-export interface Distances {
-  fromSun: number;
-  fromEarth: number;
-}
-
-export interface PlanetFormData {
-  id: number;
-  file?: File | null;
-  imageUrl: string;
-  imageName: string;
-  planetName: string;
-  description: string;
-  planetRadiusKM: number;
-  planetColor: string;
-  distInMillionsKM: Distances;
-}
 
 @Component({
   selector: 'app-add-new-planet-modal',
@@ -27,7 +12,8 @@ export interface PlanetFormData {
   styleUrl: './add-new-planet-modal.component.scss',
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    
   ]
 })
 export class AddNewPlanetModalComponent {
@@ -36,7 +22,7 @@ export class AddNewPlanetModalComponent {
 
   constructor(private planetService: PlanetService) { }
 
-  initialFormData: PlanetFormData = {
+  initialFormData: PlanetModel = {
     id: 0,
     file: null,
     imageUrl: '',
@@ -60,7 +46,7 @@ export class AddNewPlanetModalComponent {
 
   onFileSelected(event: any) {
     const input = event.target as HTMLInputElement;
-
+    
     if (input.files && input.files.length > 0) {
       this.formData.file = input.files[0];
     } else {
@@ -73,6 +59,8 @@ export class AddNewPlanetModalComponent {
 
     if (this.formData.file) {
       data.append('file', this.formData.file);
+    } else {
+      console.log("File for add for sending not add")
     }
 
     data.append('imageName', this.formData.file ? this.formData.file.name : '');
@@ -84,7 +72,6 @@ export class AddNewPlanetModalComponent {
 
     this.planetService.addPlanet(data).subscribe({
       next: (response) => {
-        console.log('Planet created:', response);
         this.formData = { ...this.initialFormData };
         this.close.emit(true);
       },

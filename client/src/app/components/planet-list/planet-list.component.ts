@@ -8,21 +8,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule, Router } from '@angular/router';
 import { AddNewPlanetModalComponent } from '../add-new-planet-modal/add-new-planet-modal.component';
 import { PlanetService } from '../../services/planet.service';
+import { PlanetModel } from '../../planetModel';
 
-export interface PlanetElement {
-  description: string;
-    file?: File | null;
-  distInMillionsKM: {
-    fromSun: number,
-    fromEarth: number
-  },
-  id: number;
-  imageName: string;
-  imageUrl: string;
-  planetColor: string,
-  planetName: string,
-  planetRadiusKM: number
-}
 
 @Component({
   selector: 'app-planet-list',
@@ -33,7 +20,7 @@ export interface PlanetElement {
 })
 export class PlanetListComponent {
   @ViewChild(MatSort) sort: MatSort = new MatSort;
-  dataSource = new MatTableDataSource<PlanetElement>();
+  dataSource = new MatTableDataSource<PlanetModel>();
   displayedColumns: string[] = ['planetName', 'planetColor', 'planetRadiusKM', 'fromSun', 'fromEarth'];
   view: string = 'table';
   showModal = false;
@@ -70,7 +57,7 @@ export class PlanetListComponent {
     this.router.navigate(['/planet', id]);
   }
 
-  onRowClicked(row: PlanetElement) {
+  onRowClicked(row: PlanetModel) {
     this.router.navigate(['/planet', row.id]);
   }
 

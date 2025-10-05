@@ -32,7 +32,7 @@
 .card-icon {
     width: 180px;
     height: 180px;
-    padding-right: 30px;
+    border-radius: 50%;
 }
 
 .main-card {
@@ -66,6 +66,7 @@
     letter-spacing: 0%;
     color: #242626;
     padding-bottom: 30px;
+    padding-left:30px;
 }
 
 .card-description {
@@ -76,6 +77,7 @@
     line-height: 20px;
     color: #595F60;
     max-width: 325px;
+    padding-left:30px;
 }
 
 .card-data {

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PlanetFormData } from '../add-new-planet-modal/add-new-planet-modal.component';
+import { PlanetModel } from '../../planetModel';
 
 @Component({
   selector: 'app-delete-planet-modal',
@@ -16,7 +16,7 @@ import { PlanetFormData } from '../add-new-planet-modal/add-new-planet-modal.com
 export class DeletePlanetModalComponent {
 
   @Input() show: boolean = false;
-  @Input() planetToDelete: PlanetFormData | null = null;
+  @Input() planetToDelete: PlanetModel | null = null;
   @Output() onConfirmDelete = new EventEmitter<number>();
   @Output() onCancel = new EventEmitter<void>();
 

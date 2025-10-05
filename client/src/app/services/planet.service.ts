@@ -1,20 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { PlanetElement } from '../components/planet-list/planet-list.component';
+import { PlanetModel } from '../planetModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanetService {
   private apiUrl = 'http://localhost:3001/api/planets';
-  private planetsSubject = new BehaviorSubject<PlanetElement[]>([]);
+  private planetsSubject = new BehaviorSubject<PlanetModel[]>([]);
   public planets$ = this.planetsSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
   getAllPlanets() {
-    this.http.get<PlanetElement[]>(this.apiUrl).subscribe(
+    this.http.get<PlanetModel[]>(this.apiUrl).subscribe(
       (response) => {
         const converted = this.convertResponse(response);
         this.planetsSubject.next(converted);
@@ -25,7 +25,7 @@ export class PlanetService {
     );
   }
 
-  convertSinglePlanet(planet: PlanetElement): PlanetElement {
+  convertSinglePlanet(planet: PlanetModel): PlanetModel {
     if (typeof planet.distInMillionsKM === 'string') {
         const parsedDist = JSON.parse(planet.distInMillionsKM);
         return {
@@ -36,16 +36,16 @@ export class PlanetService {
       return planet;
   }
 
-  convertResponse(response: PlanetElement[]): PlanetElement[] {
+  convertResponse(response: PlanetModel[]): PlanetModel[] {
     return response.map((planet) => this.convertSinglePlanet(planet));
   }
 
-  getPlanetById(id: number): Observable<PlanetElement> {
-    return this.http.get<PlanetElement>(`${this.apiUrl}/${id}`);
+  getPlanetById(id: number): Observable<PlanetModel> {
+    return this.http.get<PlanetModel>(`${this.apiUrl}/${id}`);
   }
 
-    addPlanet(newPlanet: FormData): Observable<PlanetElement> {
-      return this.http.post<PlanetElement>(this.apiUrl, newPlanet).pipe(
+    addPlanet(newPlanet: FormData): Observable<PlanetModel> {
+      return this.http.post<PlanetModel>(this.apiUrl, newPlanet).pipe(
         tap((createdPlanet) => {
           const current = this.planetsSubject.value;
           this.planetsSubject.next([...current, this.convertSinglePlanet(createdPlanet)]);
@@ -57,8 +57,8 @@ export class PlanetService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-updatePlanet(id: number, updatedPlanet: FormData): Observable<PlanetElement> {
-  return this.http.put<PlanetElement>(`${this.apiUrl}/${id}`, updatedPlanet).pipe(
+updatePlanet(id: number, updatedPlanet: FormData): Observable<PlanetModel> {
+  return this.http.put<PlanetModel>(`${this.apiUrl}/${id}`, updatedPlanet).pipe(
     tap((updated) => {
       console.log("Updated: " + JSON.stringify(updated))
       const current = this.planetsSubject.value;
