@@ -5,6 +5,7 @@ import { PlanetService } from '../../services/planet.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PlanetModel } from '../../planetModel';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-edit-planet-modal',
@@ -14,7 +15,8 @@ import { PlanetModel } from '../../planetModel';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, 
+    MatIconModule
   ]
 })
 export class EditPlanetModalComponent {
@@ -22,6 +24,7 @@ export class EditPlanetModalComponent {
   @Input() planetToDelete: PlanetModel | null = null;
   @Output() onConfirmEdit = new EventEmitter<PlanetModel>();
   @Output() onCancelEdit = new EventEmitter<void>();
+  showConfirmModal: boolean = false;
 
   constructor(private planetService: PlanetService, private route: ActivatedRoute,  private fb: FormBuilder) { }
 
@@ -70,13 +73,27 @@ export class EditPlanetModalComponent {
   }
 
  editPlanet() {
-    if (this.planetToDelete) {
-      this.onConfirmEdit.emit(this.data);
-    }
+  this.showConfirmModal = true;
+    // if (this.planetToDelete) {
+    //   this.onConfirmEdit.emit(this.data);
+    // }
   }
 
   cancelEdit() {
     this.onCancelEdit.emit();
+  }
+
+  confirmEdit() {
+    this.showConfirmModal = false;
+    this.show = false;
+    if (this.planetToDelete) {
+      this.onConfirmEdit.emit(this.data);
+    }
+    console.log('Planet edited:', this.data);
+  }
+
+    cancelConfirm() {
+    this.showConfirmModal = false;
   }
 
 }

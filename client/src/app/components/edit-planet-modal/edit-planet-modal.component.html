@@ -45,3 +45,21 @@
     </div>
   </div>
 </div>
+
+<!-- MODAL CONFIRM EDIT -->
+
+<div class="modal-backdrop" *ngIf="showConfirmModal">
+  <div class="modal-confirmation">
+    <div><mat-icon class="big-icon">announcement</mat-icon></div>
+    <!-- <div class="icon-wrapper">
+      <img src="assets/icons/icon-confirmation.svg" style="width: 100px; height: 100px; border: 1px solid red;" />
+    </div> -->
+    <div class="modal-confirmation-title"> Confirm editing </div>
+    <div class="modal-confirmation-question"> Are you sure you want to edit <strong>{{ planetToDelete?.planetName
+        }}</strong> ? </div>
+    <div class="modal-actions">
+      <button class="dark-btn" (click)="confirmEdit()">Confirm</button>
+      <button class="light-btn" (click)="cancelConfirm()">Cancel</button>
+    </div>
+  </div>
+</div>
