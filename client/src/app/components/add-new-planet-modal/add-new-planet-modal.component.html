@@ -1,48 +1,49 @@
-
+<form #planetForm="ngForm" (ngSubmit)="create()">
 <div class="modal-backdrop" *ngIf="show">
   <div class="modal">
     <div class="modal-title">New planet</div>
 
     <div class="form-group">
       <label for="photo">Photo</label>
-      <input type="file" id="imageFile" (change)="onFileSelected($event)" />
+      <input type="file" id="imageFile" (change)="onFileSelected($event)" name="file"/>
     </div>
 
     <div class="form-group">
       <label>Name</label>
-      <input type="text" [(ngModel)]="formData.planetName" />
+      <input type="text" [(ngModel)]="formData.planetName" name="planetName"/>
     </div>
 
     <div class="form-group">
       <label>Description</label>
-      <textarea [(ngModel)]="formData.description"></textarea>
+      <textarea [(ngModel)]="formData.description" name="description"></textarea>
     </div>
 
     <div class="form-row">
       <div class="form-group half">
         <label>Radius in km</label>
-        <input type="number" [(ngModel)]="formData.planetRadiusKM" />
+        <input type="number" [(ngModel)]="formData.planetRadiusKM" name="planetRadiusKM"/>
       </div>
       <div class="form-group half">
         <label>Color</label>
-        <input type="text" [(ngModel)]="formData.planetColor" />
+        <input type="text" [(ngModel)]="formData.planetColor" name="planetColor"/>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group half">
         <label>Dist. from Sun</label>
-        <input type="number" [(ngModel)]="formData.distInMillionsKM.fromSun" />
+        <input type="number" [(ngModel)]="formData.distInMillionsKM.fromSun" name="fromSun"/>
       </div>
       <div class="form-group half">
         <label>Dist. from Earth</label>
-        <input type="number" [(ngModel)]="formData.distInMillionsKM.fromEarth" />
+        <input type="number" [(ngModel)]="formData.distInMillionsKM.fromEarth" name="fromEarth"/>
       </div>
     </div>
 
     <div class="modal-actions">
-      <button class="dark-btn" (click)="create()">Create</button>
+      <button class="dark-btn" type="submit" [disabled]="planetForm.invalid">Create</button>
       <button class="light-btn" (click)="cancel()">Cancel</button>
     </div>
   </div>
 </div>
+</form>

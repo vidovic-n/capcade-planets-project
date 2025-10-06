@@ -33,13 +33,31 @@
     text-align: center;
 }
 
+.input-with-icon {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 20px;
+  pointer-events: none;
+}
+
 .search-field {
     width: 240;
     height: 20px;
+    font-size: 14px;
     border-width: 1px;
+    border-color:#BDBFBF;
     gap: 10px;
     border-radius: 4px;
-    padding: 10px;
+    padding: 10px 12px 10px 36px;
     color: #BDBFBF;
 }
 
@@ -95,6 +113,7 @@
     display: inline;
     width: 80px;
     height: 80px;
+    border-radius: 50%;
 }
 
 .card-title {
@@ -150,16 +169,11 @@ mat-card {
     padding-bottom: 10px;
 }
 
-.selected-row{
-    cursor:pointer;
+.selected-row {
+    cursor: pointer;
 }
 
 //  *********** Overriding angular material styles ************
-
-.mat-mini-fab:active {
-    background-color: #ff4081;
-    transform: scale(0.9);
-}
 
 .mat-mdc-button:not(:disabled) {
     color: white;
@@ -173,10 +187,6 @@ mat-card {
     color: #242626;
 }
 
-th.mat-sort-header-sorted {
-    color: black;
-}
-
 .mat-mdc-table {
     background-color: white;
 }
@@ -187,7 +197,6 @@ th.mat-sort-header-sorted {
 
 .mat-mdc-header-cell {
     border-bottom: 1px solid #DEDFDF;
-
 }
 
 .mat-mdc-row {
@@ -198,10 +207,45 @@ th.mat-sort-header-sorted {
     border-bottom: 1px solid #DEDFDF;
 }
 
-.mdc-dialog--open .mat-mdc-dialog-surface {
-    width: max-content !important;
+.search-form-field .mat-form-field-wrapper {
+  padding-bottom: 0;
 }
 
-.mat-mdc-dialog-container {
-    width: max-content !important;
+.search-form-field .mat-form-field-flex {
+  height: 36px;
+  align-items: center;
 }
+
+.search-form-field .mat-form-field-infix {
+  height: 36px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+.search-form-field input.mat-input-element {
+  height: 36px;
+  line-height: 36px;
+  padding: 0;
+  font-size: 14px;
+}
+
+.mat-mdc-form-field {
+  flex-direction: row !important;
+}
+
+.mat-icon {
+    height: 20px;
+    color: #595F60;
+}
+
+.mat-mdc-mini-fab {
+    background-color:#ffff;
+    box-shadow: none;
+    border-radius: 4px;
+}
+
+.active-btn {
+  background-color: #D0DCE1;
+}
+

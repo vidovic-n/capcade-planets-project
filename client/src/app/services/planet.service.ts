@@ -25,21 +25,6 @@ export class PlanetService {
     );
   }
 
-  convertSinglePlanet(planet: PlanetModel): PlanetModel {
-    if (typeof planet.distInMillionsKM === 'string') {
-      const parsedDist = JSON.parse(planet.distInMillionsKM);
-      return {
-        ...planet,
-        distInMillionsKM: parsedDist,
-      };
-    }
-    return planet;
-  }
-
-  convertResponse(response: PlanetModel[]): PlanetModel[] {
-    return response.map((planet) => this.convertSinglePlanet(planet));
-  }
-
   getPlanetById(id: number): Observable<PlanetModel> {
     return this.http.get<PlanetModel>(`${this.apiUrl}/${id}`);
   }
@@ -60,7 +45,6 @@ export class PlanetService {
   updatePlanet(id: number, updatedPlanet: FormData): Observable<PlanetModel> {
     return this.http.put<PlanetModel>(`${this.apiUrl}/${id}`, updatedPlanet).pipe(
       tap((updated) => {
-        console.log("Updated: " + JSON.stringify(updated))
         const current = this.planetsSubject.value;
         const updatedList = current.map((planet) =>
           planet.id === updated.id ? updated : planet
@@ -68,6 +52,21 @@ export class PlanetService {
         this.planetsSubject.next(updatedList);
       })
     );
+  }
+
+  convertSinglePlanet(planet: PlanetModel): PlanetModel {
+    if (typeof planet.distInMillionsKM === 'string') {
+      const parsedDist = JSON.parse(planet.distInMillionsKM);
+      return {
+        ...planet,
+        distInMillionsKM: parsedDist,
+      };
+    }
+    return planet;
+  }
+
+  convertResponse(response: PlanetModel[]): PlanetModel[] {
+    return response.map((planet) => this.convertSinglePlanet(planet));
   }
 
 }

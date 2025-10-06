@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule, Router } from '@angular/router';
@@ -16,7 +18,7 @@ import { PlanetModel } from '../../planetModel';
   templateUrl: './planet-list.component.html',
   styleUrls: ['./planet-list.component.scss'],
   standalone: true,
-  imports: [AddNewPlanetModalComponent, CommonModule, MatTableModule, RouterModule, MatButtonModule, MatSortModule, MatIconModule, MatCardModule]
+  imports: [AddNewPlanetModalComponent, CommonModule, MatTableModule, RouterModule, MatButtonModule, MatSortModule, MatIconModule, MatCardModule, MatFormFieldModule, MatInputModule]
 })
 export class PlanetListComponent {
   @ViewChild(MatSort) sort: MatSort = new MatSort;
@@ -29,7 +31,6 @@ export class PlanetListComponent {
 
   ngOnInit(): void {
     this.planetService.getAllPlanets();
-
     this.planetService.planets$.subscribe((data) => {
       this.dataSource.data = data;
     });

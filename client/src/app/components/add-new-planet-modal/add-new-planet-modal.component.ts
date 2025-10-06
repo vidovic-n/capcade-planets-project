@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PlanetService } from '../../services/planet.service';
 import { PlanetModel } from '../../planetModel';
 
-
 @Component({
   selector: 'app-add-new-planet-modal',
   standalone: true,
@@ -13,9 +12,9 @@ import { PlanetModel } from '../../planetModel';
   imports: [
     CommonModule,
     FormsModule,
-    
   ]
 })
+
 export class AddNewPlanetModalComponent {
   @Input() show: boolean = false;
   @Output() close = new EventEmitter<boolean>();
@@ -29,11 +28,11 @@ export class AddNewPlanetModalComponent {
     imageName: '',
     planetName: '',
     description: '',
-    planetRadiusKM: 0,
+    planetRadiusKM: null,
     planetColor: '',
     distInMillionsKM: {
-      fromSun: 0,
-      fromEarth: 0
+      fromSun: null,
+      fromEarth: null
     },
   };
 
@@ -60,13 +59,13 @@ export class AddNewPlanetModalComponent {
     if (this.formData.file) {
       data.append('file', this.formData.file);
     } else {
-      console.log("File for add for sending not add")
+      console.log("File for sending not add")
     }
 
     data.append('imageName', this.formData.file ? this.formData.file.name : '');
     data.append('planetName', this.formData.planetName);
     data.append('description', this.formData.description);
-    data.append('planetRadiusKM', this.formData.planetRadiusKM.toString());
+    data.append('planetRadiusKM',  this.formData.planetRadiusKM ?  this.formData.planetRadiusKM!.toString() : '');
     data.append('planetColor', this.formData.planetColor);
     data.append('distInMillionsKM', JSON.stringify(this.formData.distInMillionsKM));
 

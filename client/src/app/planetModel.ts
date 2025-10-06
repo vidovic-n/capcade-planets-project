@@ -5,12 +5,12 @@ export interface PlanetModel {
   imageName: string;
   planetName: string;
   description: string;
-  planetRadiusKM: number;
+  planetRadiusKM: number | null;
   planetColor: string;
   distInMillionsKM: Distances;
 }
 
 export interface Distances {
-  fromSun: number;
-  fromEarth: number;
+  fromSun: number | null;
+  fromEarth: number | null;
 }

@@ -75,7 +75,7 @@ export class PlanetDetailsComponent implements OnInit {
     const formData = new FormData();
     formData.append('planetName', editedData.planetName);
     formData.append('description', editedData.description);
-    formData.append('planetRadiusKM', editedData.planetRadiusKM.toString());
+    formData.append('planetRadiusKM', editedData.planetRadiusKM!.toString());
     formData.append('planetColor', editedData.planetColor);
     formData.append('imageName', editedData.imageName);
     formData.append('distInMillionsKM', JSON.stringify(editedData.distInMillionsKM));
@@ -92,11 +92,9 @@ export class PlanetDetailsComponent implements OnInit {
     });
   }
 
-  
   onEditCancelled() {
     this.showEditModal = false;
   }
-
 
   onDeleteCancelled() {
     this.showModal = false;

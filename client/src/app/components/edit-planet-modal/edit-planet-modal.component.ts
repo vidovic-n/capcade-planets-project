@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PlanetService } from '../../services/planet.service';
-import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {  FormGroup } from '@angular/forms';
 import { PlanetModel } from '../../planetModel';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -15,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     MatIconModule
   ]
 })
@@ -25,11 +23,12 @@ export class EditPlanetModalComponent {
   @Output() onConfirmEdit = new EventEmitter<PlanetModel>();
   @Output() onCancelEdit = new EventEmitter<void>();
   showConfirmModal: boolean = false;
+  formGroup!: FormGroup;
 
-  constructor(private planetService: PlanetService, private route: ActivatedRoute,  private fb: FormBuilder) { }
+  constructor() { }
 
   data = this.planetToDelete ?? {
-   id: 0,
+    id: 0,
     file: null,
     imageUrl: '',
     imageName: '',
@@ -41,10 +40,9 @@ export class EditPlanetModalComponent {
       fromSun: 0,
       fromEarth: 0
     },
-};
+  };
 
-  formGroup!: FormGroup;
-    ngOnChanges(): void {
+  ngOnChanges(): void {
     if (this.planetToDelete) {
       this.data = {
         id: this.planetToDelete.id,
@@ -72,11 +70,8 @@ export class EditPlanetModalComponent {
     }
   }
 
- editPlanet() {
-  this.showConfirmModal = true;
-    // if (this.planetToDelete) {
-    //   this.onConfirmEdit.emit(this.data);
-    // }
+  editPlanet() {
+    this.showConfirmModal = true;
   }
 
   cancelEdit() {
@@ -89,10 +84,9 @@ export class EditPlanetModalComponent {
     if (this.planetToDelete) {
       this.onConfirmEdit.emit(this.data);
     }
-    console.log('Planet edited:', this.data);
   }
 
-    cancelConfirm() {
+  cancelConfirm() {
     this.showConfirmModal = false;
   }
 

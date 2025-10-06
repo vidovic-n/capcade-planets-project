@@ -2,20 +2,25 @@
     <div class="header-title">Planets</div>
     <span class="header-spacer"></span>
     <div class="header-actions">
-            <div class="header-flex-container">
-                <div> <button matMiniFab (click)="view = 'grid'">
-                        <mat-icon>view_module</mat-icon>
-                    </button>
-                </div>
-                <div> <button matMiniFab (click)="view = 'table'">
-                        <mat-icon>view_list</mat-icon>
-                    </button>
-                </div>
+        <div class="header-flex-container">
+            <div>
+                 <button matMiniFab  [ngClass]="{ 'active-btn': view === 'grid' }" (click)="view = 'grid'">
+                    <mat-icon>view_module</mat-icon>
+                </button>
             </div>
-        <div><input matInput class="search-field" (keyup)="applyFilter($event)" placeholder="Search..."></div>
-        <div><button mat-button class="btn-add-planet"  (click)="openModal()"> New planet</button></div>
+            <div> 
+                <button matMiniFab [ngClass]="{ 'active-btn': view === 'table' }" (click)="view = 'table'">
+                    <mat-icon>view_list</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="input-with-icon">
+            <mat-icon class="search-icon">search</mat-icon>
+            <input matInput class="search-field" (keyup)="applyFilter($event)" placeholder="Search...">
+        </div>
+        <div><button mat-button class="btn-add-planet" (click)="openModal()"> New planet</button></div>
     </div>
-    <app-add-new-planet-modal  [show]="showModal" (close)="closeModal()"></app-add-new-planet-modal>
+    <app-add-new-planet-modal [show]="showModal" (close)="closeModal()"></app-add-new-planet-modal>
 </div>
 
 <div class="main-wrapper">
@@ -67,13 +72,14 @@
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)" class="selected-row"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"
+                    class="selected-row"></tr>
             </table>
         </div>
     </div>
 
     <div *ngIf="view === 'grid'" class="card-wrapper">
-        <mat-card *ngFor="let card of dataSource.data" class="card"  (click)="openPlanetDetails(card.id)">
+        <mat-card *ngFor="let card of dataSource.data" class="card" (click)="openPlanetDetails(card.id)">
             <div><img [src]="card.imageUrl" class="card-icon"></div>
             <p class="card-title"> {{ card.planetName }}</p>
             <p class="card-description"> {{ card.description }}</p>
