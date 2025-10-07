@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {  FormGroup } from '@angular/forms';
-import { PlanetModel } from '../../planetModel';
+import { PlanetModel } from '../../models/planet.model';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -23,7 +22,6 @@ export class EditPlanetModalComponent {
   @Output() onConfirmEdit = new EventEmitter<PlanetModel>();
   @Output() onCancelEdit = new EventEmitter<void>();
   showConfirmModal: boolean = false;
-  formGroup!: FormGroup;
 
   constructor() { }
 
@@ -57,6 +55,13 @@ export class EditPlanetModalComponent {
           fromEarth: this.planetToDelete.distInMillionsKM.fromEarth
         }
       };
+    }
+  }
+
+    onFileInput(): void {
+    const fileInput = document.getElementById('imageFile') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();
     }
   }
 

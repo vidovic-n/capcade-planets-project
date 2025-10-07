@@ -1,66 +1,68 @@
 <form #editForm="ngForm" (ngSubmit)="editPlanet()">
-<div class="modal-backdrop" *ngIf="show">
-  <div class="modal">
-    <div class="modal-title">Edit planet</div>
+  <div class="modal-backdrop" *ngIf="show">
+    <div class="modal">
+      <div class="modal-title">Edit planet</div>
 
-    <div class="form-group">
-      <label for="photo">Photo</label>
-      <input type="file" id="imageFile" (change)="onFileSelected($event)" name="file"/>
-    </div>
-
-    <div class="form-group">
-      <label>Name</label>
-      <input type="text" [(ngModel)]="data.planetName" name="planetName"/>
-    </div>
-
-    <div class="form-group">
-      <label>Description</label>
-      <textarea [(ngModel)]="data.description" name="description"></textarea>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group half">
-        <label>Radius in km</label>
-        <input type="number" [(ngModel)]="data.planetRadiusKM" name="planetRadiusKM"/>
+      <div class="form-group photo-wrapper">
+        <label class="modal-label">Photo</label>
+        <span class="label-spacer"></span>
+        <div>
+          <input type="file" id="imageFile" #fileInput style="display: none" name="file"
+            (change)="onFileSelected($event)" />
+          <button type="button" class="btn-browse" (click)="onFileInput()">Browse...</button>
+        </div>
       </div>
-      <div class="form-group half">
-        <label>Color</label>
-        <input type="text" [(ngModel)]="data.planetColor" name="planetColor"/>
-      </div>
-    </div>
 
-    <div class="form-row">
-      <div class="form-group half">
-        <label>Dist. from Sun</label>
-        <input type="number" [(ngModel)]="data.distInMillionsKM.fromSun" name="fromSun"/>
+      <div class="form-group">
+        <label class="modal-label">Name</label>
+        <input type="text" [(ngModel)]="data.planetName" name="planetName" />
       </div>
-      <div class="form-group half">
-        <label>Dist. from Earth</label>
-        <input type="number" [(ngModel)]="data.distInMillionsKM.fromEarth" name="fromEarth"/>
-      </div>
-    </div>
 
-    <div class="modal-actions">
-      <button class="dark-btn" type="submit" [disabled]="editForm.invalid">Confirm</button>
-      <button class="light-btn" (click)="cancelEdit()">Cancel</button>
+      <div class="form-group">
+        <label class="modal-label">Description</label>
+        <textarea [(ngModel)]="data.description" name="description"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half">
+          <label class="modal-label">Radius in km</label>
+          <input type="number" [(ngModel)]="data.planetRadiusKM" name="planetRadiusKM" />
+        </div>
+        <div class="form-group half">
+          <label class="modal-label">Color</label>
+          <input type="text" [(ngModel)]="data.planetColor" name="planetColor" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half">
+          <label class="modal-label">Dist. from Sun</label>
+          <input type="number" [(ngModel)]="data.distInMillionsKM.fromSun" name="fromSun" />
+        </div>
+        <div class="form-group half">
+          <label class="modal-label">Dist. from Earth</label>
+          <input type="number" [(ngModel)]="data.distInMillionsKM.fromEarth" name="fromEarth" />
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="dark-btn" type="submit" [disabled]="editForm.invalid">Confirm</button>
+        <button class="light-btn" (click)="cancelEdit()">Cancel</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- MODAL CONFIRM EDIT -->
+  <!-- MODAL CONFIRM EDIT -->
 
-<div class="modal-backdrop" *ngIf="showConfirmModal">
-  <div class="modal-confirmation">
-    <div><mat-icon class="big-icon">announcement</mat-icon></div>
-    <!-- <div class="icon-wrapper">
-      <img src="assets/icons/icon-confirmation.svg" />
-    </div> -->
-    <div class="modal-confirmation-title"> Confirm editing </div>
-    <div class="modal-confirmation-question"> Are you sure you want to edit <strong>{{ planetToDelete?.planetName
-        }}</strong> ? </div>
-    <div class="modal-actions">
-      <button class="dark-btn" (click)="confirmEdit()">Confirm</button>
-      <button class="light-btn" (click)="cancelConfirm()">Cancel</button>
+  <div class="modal-backdrop" *ngIf="showConfirmModal">
+    <div class="modal-confirmation">
+      <div><mat-icon class="big-icon">announcement</mat-icon></div>
+      <div class="modal-confirmation-title"> Confirm editing </div>
+      <div class="modal-confirmation-question"> Are you sure you want to edit <strong>{{ planetToDelete?.planetName
+          }}</strong> ? </div>
+      <div class="modal-actions">
+        <button class="dark-btn" (click)="confirmEdit()">Confirm</button>
+        <button class="light-btn" (click)="cancelConfirm()">Cancel</button>
+      </div>
     </div>
   </div>
-</div>

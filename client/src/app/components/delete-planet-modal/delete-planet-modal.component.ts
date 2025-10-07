@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PlanetModel } from '../../planetModel';
+import { PlanetModel } from '../../models/planet.model';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({

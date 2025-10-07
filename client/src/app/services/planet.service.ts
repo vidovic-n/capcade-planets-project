@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { PlanetModel } from '../planetModel';
+import { PlanetModel } from '../models/planet.model';
 
 @Injectable({
   providedIn: 'root'

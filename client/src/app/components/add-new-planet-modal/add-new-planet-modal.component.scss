@@ -1,0 +1,21 @@
+.photo-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-browse {
+    opacity: 1;
+    border-radius: 4px;
+    gap: 10px;
+    padding-top: 4px;
+    padding-right: 12px;
+    padding-bottom: 4px;
+    padding-left: 12px;
+    background-color: #595F60;
+    border-style: none;
+    color: #ffff;
+}
+
+.label-spacer {
+    flex: 1 1 auto;
+}

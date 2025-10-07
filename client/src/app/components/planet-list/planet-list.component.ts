@@ -10,8 +10,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule, Router } from '@angular/router';
 import { AddNewPlanetModalComponent } from '../add-new-planet-modal/add-new-planet-modal.component';
 import { PlanetService } from '../../services/planet.service';
-import { PlanetModel } from '../../planetModel';
-
+import { PlanetModel } from '../../models/planet.model';
 
 @Component({
   selector: 'app-planet-list',

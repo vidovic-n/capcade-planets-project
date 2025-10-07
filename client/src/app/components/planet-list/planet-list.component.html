@@ -4,11 +4,11 @@
     <div class="header-actions">
         <div class="header-flex-container">
             <div>
-                 <button matMiniFab  [ngClass]="{ 'active-btn': view === 'grid' }" (click)="view = 'grid'">
+                <button matMiniFab [ngClass]="{ 'active-btn': view === 'grid' }" (click)="view = 'grid'">
                     <mat-icon>view_module</mat-icon>
                 </button>
             </div>
-            <div> 
+            <div>
                 <button matMiniFab [ngClass]="{ 'active-btn': view === 'table' }" (click)="view = 'table'">
                     <mat-icon>view_list</mat-icon>
                 </button>

@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { DeletePlanetModalComponent } from '../delete-planet-modal/delete-planet-modal.component';
 import { EditPlanetModalComponent } from '../edit-planet-modal/edit-planet-modal.component';
-import { PlanetModel } from '../../planetModel';
+import { PlanetModel } from '../../models/planet.model';
 
 @Component({
   selector: 'app-planet-details',

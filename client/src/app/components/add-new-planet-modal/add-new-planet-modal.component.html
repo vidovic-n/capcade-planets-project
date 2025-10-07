@@ -1,49 +1,54 @@
 <form #planetForm="ngForm" (ngSubmit)="create()">
-<div class="modal-backdrop" *ngIf="show">
-  <div class="modal">
-    <div class="modal-title">New planet</div>
+  <div class="modal-backdrop" *ngIf="show">
+    <div class="modal">
+      <div class="modal-title">New planet</div>
 
-    <div class="form-group">
-      <label for="photo">Photo</label>
-      <input type="file" id="imageFile" (change)="onFileSelected($event)" name="file"/>
-    </div>
-
-    <div class="form-group">
-      <label>Name</label>
-      <input type="text" [(ngModel)]="formData.planetName" name="planetName"/>
-    </div>
-
-    <div class="form-group">
-      <label>Description</label>
-      <textarea [(ngModel)]="formData.description" name="description"></textarea>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group half">
-        <label>Radius in km</label>
-        <input type="number" [(ngModel)]="formData.planetRadiusKM" name="planetRadiusKM"/>
+      <div class="form-group photo-wrapper">
+        <label class="modal-label">Photo</label>
+        <span class="label-spacer"></span>
+        <div><input type="file" id="imageFile" style="display: none" name="file" (change)="onFileSelected($event)" />
+          <button type="button" class="btn-browse" (click)="onFileInput()">Browse...</button>
+        </div>
       </div>
-      <div class="form-group half">
-        <label>Color</label>
-        <input type="text" [(ngModel)]="formData.planetColor" name="planetColor"/>
-      </div>
-    </div>
 
-    <div class="form-row">
-      <div class="form-group half">
-        <label>Dist. from Sun</label>
-        <input type="number" [(ngModel)]="formData.distInMillionsKM.fromSun" name="fromSun"/>
+      <div class="form-group">
+        <label class="modal-label">Name</label>
+        <input type="text" [(ngModel)]="formData.planetName" name="planetName" />
       </div>
-      <div class="form-group half">
-        <label>Dist. from Earth</label>
-        <input type="number" [(ngModel)]="formData.distInMillionsKM.fromEarth" name="fromEarth"/>
-      </div>
-    </div>
 
-    <div class="modal-actions">
-      <button class="dark-btn" type="submit" [disabled]="planetForm.invalid">Create</button>
-      <button class="light-btn" (click)="cancel()">Cancel</button>
+      <div class="form-group">
+        <label class="modal-label">Description</label>
+        <textarea [(ngModel)]="formData.description" name="description"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half">
+          <label class="modal-label">Radius in km</label>
+          <input type="number" [(ngModel)]="formData.planetRadiusKM" name="planetRadiusKM" />
+        </div>
+        <div class="form-group half">
+          <label class="modal-label">Color</label>
+          <input type="text" [(ngModel)]="formData.planetColor" name="planetColor" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half">
+          <label class="modal-label">Dist. from Sun</label>
+          <input type="number" [(ngModel)]="formData.distInMillionsKM.fromSun" name="fromSun" />
+        </div>
+        <div class="form-group half">
+          <label class="modal-label">Dist. from Earth</label>
+          <input type="number" [(ngModel)]="formData.distInMillionsKM.fromEarth" name="fromEarth" />
+        </div>
+      </div>
+
+      <!-- mark required fields in form if necessary -->
+
+      <div class="modal-actions">
+        <button class="dark-btn" type="submit" [disabled]="planetForm.invalid">Create</button>
+        <button class="light-btn" (click)="cancel()">Cancel</button>
+      </div>
     </div>
   </div>
-</div>
 </form>

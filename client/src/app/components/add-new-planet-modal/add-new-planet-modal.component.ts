@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component,  EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PlanetService } from '../../services/planet.service';
-import { PlanetModel } from '../../planetModel';
+import { PlanetModel } from '../../models/planet.model';
 
 @Component({
   selector: 'app-add-new-planet-modal',
@@ -21,7 +21,7 @@ export class AddNewPlanetModalComponent {
 
   constructor(private planetService: PlanetService) { }
 
-  initialFormData: PlanetModel = {
+  formData: PlanetModel = {
     id: 0,
     file: null,
     imageUrl: '',
@@ -36,12 +36,12 @@ export class AddNewPlanetModalComponent {
     },
   };
 
-  formData = { ...this.initialFormData };
-
-  cancel() {
-    this.formData = { ...this.initialFormData };
-    this.close.emit();
+  onFileInput(): void {
+  const fileInput = document.getElementById('imageFile') as HTMLInputElement;
+  if (fileInput) {
+    fileInput.click();
   }
+}
 
   onFileSelected(event: any) {
     const input = event.target as HTMLInputElement;
@@ -71,7 +71,6 @@ export class AddNewPlanetModalComponent {
 
     this.planetService.addPlanet(data).subscribe({
       next: (response) => {
-        this.formData = { ...this.initialFormData };
         this.close.emit(true);
       },
       error: (err) => {
@@ -80,4 +79,10 @@ export class AddNewPlanetModalComponent {
       }
     });
   }
+
+  cancel() {
+    this.close.emit();
+  }
+
 }
+
